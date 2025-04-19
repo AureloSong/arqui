@@ -1,0 +1,24 @@
+;Memoria de Datos.  
+
+org 1000h
+num1    db 05h
+num2    db 03h
+;Memoria de instrucciones.
+org 3000h
+    mul:    cmp al,0
+        jz fin
+        cmp cl,0
+        jz fin
+        mov ah,0
+        mov dx,0
+    lazo:   add dx,ax
+            dec cl
+            jnz lazo
+    fin:    ret
+;Programa Principal.
+org 2000h
+    mov al, num1
+    mov cl, num2
+    call mul
+    hlt
+end
