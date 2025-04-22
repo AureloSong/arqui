@@ -5,7 +5,7 @@ msj DB "INGENIERIA E INFORMATICA"
 fin DB ?
 ORG 3000h
 poll: in al,ESTADO
-and al,1
+and al,1 ;0000 0001
 jnz poll
 ret
 ORG 3200h
@@ -16,7 +16,7 @@ out DATO, al
 ret
 ORG 2000H ; Prog principal
 in al, ESTADO
-and al, 7Fh ; modo consulta de estado
+and al, 7Fh ; modo consulta de estado 0111 1111 
 out ESTADO, al
 mov bx, offset msj
 mov cl, offset fin - offset msj

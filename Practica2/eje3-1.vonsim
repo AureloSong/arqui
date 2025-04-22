@@ -15,7 +15,7 @@ out PB, al
 inc bx
 dec cl
 jnz loop
-mov al, 255
+mov al, 255 ;1111 1111
 out PB, al
 int 0
 end

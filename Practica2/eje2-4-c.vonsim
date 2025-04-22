@@ -18,12 +18,12 @@ jnz poll
 ret
 ORG 3200h
 strobe0: in al, PA ; envio 0
-and al, 0FDh
+and al, 0FDh ; 1111 1101
 out PA, al
 ret
 ORG 3300h
 strobe1: in al, PA ; envio 1
-or al, 02h
+or al, 02h ; 0000 0010 
 out PA, al
 ret
 ORG 3500h

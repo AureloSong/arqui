@@ -6,13 +6,13 @@ CB EQU 33h
 ORG 3000h
 config_pio: mov al, 0
 out CB, al
-mov al, 255
+mov al, 255 ;1111 1111
 out CA, al
 ret
 
 ORG 2000h
 call config_pio
-loop: mov al, 0FFh
+loop: mov al, 0FFh ; 1111 1111
 out PB, al
 in al, PA
 ; Proceso valor.
