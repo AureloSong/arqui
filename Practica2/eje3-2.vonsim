@@ -1,0 +1,22 @@
+PA EQU 30h
+PB EQU 31h
+CA EQU 32h
+CB EQU 33h
+
+ORG 3000h
+config_pio: mov al, 0
+out CB, al
+mov al, 255
+out CA, al
+ret
+
+ORG 2000h
+call config_pio
+loop: mov al, 0FFh
+out PB, al
+in al, PA
+; Proceso valor.
+cmp al, 0
+jnz loop
+int 0
+end

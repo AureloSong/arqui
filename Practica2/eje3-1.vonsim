@@ -1,0 +1,21 @@
+PB EQU 31h
+CB EQU 33h
+ORG 1000H
+cadena db "UNLP"
+fin db ?
+ORG 2000H
+mov al, 0 ;config PIO
+out CB, al
+mov bx, offset cadena
+mov cl, offset fin - offset cadena
+loop: mov al, 0
+out PB, al
+mov al, [bx]
+out PB, al
+inc bx
+dec cl
+jnz loop
+mov al, 255
+out PB, al
+int 0
+end
