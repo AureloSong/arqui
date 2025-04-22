@@ -2,8 +2,9 @@ PA EQU 30h
 PB EQU 31h
 CA EQU 32h
 CB EQU 33h
-ORG 1000h; Memoria de datos
-CHAR DB "A"
+ORG 1000h
+msj DB "ORGANIZACIÓN Y ARQUITECTURA DE COMPUTADORAS"
+fin DB ?
 ORG 3000h
 ini_pio: mov al, 0FDh ; strobe salida (0), busy entrada (1)
 out CA, al
@@ -16,23 +17,32 @@ and al,1
 jnz poll
 ret
 ORG 3200h
-flanco_ascendente: in al, PA ; primero envio 0, luego 1
+strobe0: in al, PA ; envio 0
 and al, 0FDh
-out PA, al
-in al, PA
-or al, 02h ;0000 0010 
 out PA, al
 ret
 ORG 3300h
+strobe1: in al, PA ; envio 1
+or al, 02h
+out PA, al
+ret
+ORG 3500h
 imprimir_caracter: push ax
 call poll
 pop ax
 out PB, al
-call flanco_ascendente
+call strobe1
+call strobe0
 ret
 ORG 2000h ; Prog principal
 call ini_pio
-mov al, CHAR
+call strobe0
+mov bx, offset msj
+mov cl, offset fin - offset msj
+lazo: mov al, [bx]
 call imprimir_caracter
+inc bx
+dec cl
+jnz lazo
 int 0
 end
