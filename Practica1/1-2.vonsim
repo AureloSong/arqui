@@ -1,3 +1,4 @@
+;1.2) Llamando a una subrutina MUL para efectuar la operación, pasando los parámetros por valor desde el programa principal a través de registros;
 ;Memoria de Datos.  
 
 org 1000h
@@ -5,16 +6,16 @@ num1    db 05h
 num2    db 03h
 ;Memoria de instrucciones.
 org 3000h
-    mul:    cmp al,0
-        jz fin
-        cmp cl,0
-        jz fin
-        mov ah,0
-        mov dx,0
-    lazo:   add dx,ax
-            dec cl
-            jnz lazo
-    fin:    ret
+mul:    cmp al,0
+    jz fin
+    cmp cl,0
+    jz fin
+    mov ah,0
+    mov dx,0
+lazo:   add dx,ax
+        dec cl
+        jnz lazo
+fin:    ret
 ;Programa Principal.
 org 2000h
     mov al, num1

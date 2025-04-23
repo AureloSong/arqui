@@ -1,3 +1,6 @@
+; Multiplicación de números sin signo.
+; Escribir un programa que calcule el producto entre dos números sin signo almacenados en la memoria del microprocesador:
+;1.1) Sin hacer llamados a subrutinas, resolviendo el problema desde el programa principal
 ; Memoria de Datos
 		ORG 1000H
 	NUM1 	DB     05H

@@ -1,11 +1,15 @@
+; 2) Escribir un programa que calcule el producto entre dos números 
+; sin signo almacenados en la memoria del microprocesador 
+; llamando a una subrutina MUL, pero en este caso pasando los parámetros por
+; valor y por referencia a través de la pila.
 ; Memoria de datos
-ORG 1000H
+	ORG 1000H
 NUM1 DW  5H
 NUM2 DW  3H
 RES DW ?
 
 ; Programa principal
-ORG 2000H
+	ORG 2000H
 MOV AX, NUM1
 PUSH AX
 MOV AX, NUM2
@@ -18,10 +22,10 @@ POP AX
 POP AX
 POP AX
 HLT
-END
 
-ORG 3000H ; Subrutina MUL
-MUL:          PUSH BX
+
+	ORG 3000H ; Subrutina MUL
+MUL:	PUSH BX
 	MOV BX, SP
 	PUSH CX
 	PUSH AX
@@ -42,3 +46,5 @@ SUMA:       ADD DX, AX
 	POP CX
 	POP BX
 	RET
+
+  END

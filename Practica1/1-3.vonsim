@@ -1,22 +1,23 @@
-    org 1000h
-    num1    dw 5h
-    num2    dw 3h 
+;1.3) Llamando a una subrutina MUL, pasando los parámetros por referencia desde el programa principal a través de registros.
+org 1000h
+num1    dw 5h
+num2    dw 3h 
 
 
-    org 3000h
+org 3000h
 mul:    mov dx,0
 lazo:   mov bx,ax
-        add dx, [BX]
-        push dx
-        mov bx, cx
-        mov dx,[bx]
-        dec dx
-        mov [bx],dx
-        pop dx
-        jnz lazo
-        ret
+    add dx, [BX]
+    push dx
+    mov bx, cx
+    mov dx,[bx]
+    dec dx
+    mov [bx],dx
+    pop dx
+    jnz lazo
+    ret
 
-    org 2000h
+org 2000h
 mov ax, offset num1
 mov cx, offset num2
 call mul
