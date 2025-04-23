@@ -4,7 +4,7 @@ CA 	EQU 32H
 CB 	EQU 33H
 
 ORG 2000H
-	MOV   AL,  0FFH  		
+	MOV   AL,  11111111b ;0FFH  		
 	OUT   CA,  AL
 	MOV  AL, 0 
 	OUT  CB, AL
