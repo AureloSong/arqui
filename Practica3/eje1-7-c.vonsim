@@ -1,0 +1,59 @@
+; Modificar a) de modo que el string a imprimir se lea desde teclado. El string a leer tiene una longitud
+; fija de 10 caracteres, y se lee de forma completa antes de comenzar la impresión. Tener en cuenta
+; entonces que las interrupciones deben esperar a que se ingrese todo el string.
+
+DATO EQU 40H
+EST EQU 41H
+IMR EQU 21H
+INT2 EQU 26H
+EOI EQU 20H
+
+ORG 40 
+DW RUT_HAND
+
+    ORG 3000h
+RUT_HAND: MOV AL, [BX]
+    OUT DATO, AL
+    INC BX
+    JNZ FIN
+    IN AL, EST
+    AND AL, 01111111B; 07FH
+    OUT EST, AL
+    MOV AL, 11111111B; 0FFH
+    OUT IMR, AL
+FIN: MOV AL, EOI
+    OUT EOI, AL 
+    IRET
+
+    ORG 1000H
+NUM_CAR DB 5
+CAR DB ?
+
+    ORG 2000h
+    MOV BX, OFFSET CAR
+    MOV CL, NUM_CAR
+LAZO: INT 6
+    INC BX 
+    DEC CL
+    JNZ LAZO
+    MOV BX, OFFSET CAR
+    MOV CL, NUM_CAR
+    ; CONFIGURO
+    CLI 
+    MOV AL, 11111010B; 0FBH
+    OUT IMR, AL
+    MOV AL, 10
+    OUT INT2, AL
+    IN AL, EST
+    OR AL, 10000000B; 080H
+    OUT EST, AL
+    STI
+    ;FIN CONFIG 
+ESPERA: CMP CL, 0
+    JNZ ESPERA
+    ;DESHABILITO INT
+    IN AL, EST
+    AND AL, 01111111B; 07FH
+    OUT EST, AL
+    INT 0
+END    
