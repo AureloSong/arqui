@@ -12,7 +12,7 @@ ingreso:    .asciiz ""
             ld      $t0, CONTROL($zero)
             ld      $t1, DATA($zero)
             daddi   $t2, $zero, texto
-            sd      $t2. 0($t1)
+            sd      $t2, 0($t1)
             daddi   $t2, $zero, 4
             sd      $t2, 0($t0)
             daddi   $t3, $zero, ingreso
@@ -27,7 +27,8 @@ LOOP:       sd      $t4, 0($t0)
             daddi   $t3, $zero, clave
             daddi   $t4, $zero, ingreso
 CHEQUEO:    lbu     $t5, 0($t3)
-            bnez    $t5, $t6, NO           
+            lbu     $t6, 0($t4)
+            bne     $t5, $t6, no           
             daddi   $t3, $t3, 1
             daddi   $t4, $t4, 1
             daddi   $t2, $t2, -1
@@ -35,7 +36,7 @@ CHEQUEO:    lbu     $t5, 0($t3)
             daddi   $t2, $zero, permitir
             sd      $t2, 0($t1)
             j MOSTRAR
-NO:         daddi   $t2, $zero, denegar
+no:         daddi   $t2, $zero, denegar
             sd      $t2, 0($t1)
 MOSTRAR:    daddi   $t2, $zero, 4
             sd      $t2, 0($t0)
